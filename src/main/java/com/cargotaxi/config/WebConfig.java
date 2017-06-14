@@ -3,13 +3,13 @@ package com.cargotaxi.config;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support
         .AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support
         .AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
+import java.util.EnumSet;
 
 public class WebConfig extends
         AbstractAnnotationConfigDispatcherServletInitializer {
@@ -31,6 +31,20 @@ public class WebConfig extends
         DispatcherServlet dispatcherServlet = new DispatcherServlet
                 (servletAppContext);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
+
+        //encoding russian symbols
+        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType
+                .REQUEST, DispatcherType.FORWARD);
+
+        CharacterEncodingFilter characterEncodingFilter = new
+                CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+
+        FilterRegistration.Dynamic characterEncoding = servletContext
+                .addFilter("characterEncoding", characterEncodingFilter);
+        characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+        //end encoding
 
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet
                 ("dispatcher", dispatcherServlet);

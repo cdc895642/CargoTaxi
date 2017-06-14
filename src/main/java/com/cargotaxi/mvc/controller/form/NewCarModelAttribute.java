@@ -1,8 +1,5 @@
 package com.cargotaxi.mvc.controller.form;
 
-import com.cargotaxi.mvc.service.CarTypeService;
-import com.cargotaxi.mvc.service.UserService;
-
 import java.math.BigDecimal;
 
 public class NewCarModelAttribute {

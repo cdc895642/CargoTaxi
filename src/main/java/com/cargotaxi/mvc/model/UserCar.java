@@ -16,7 +16,7 @@ public class UserCar {
     private int id;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
 

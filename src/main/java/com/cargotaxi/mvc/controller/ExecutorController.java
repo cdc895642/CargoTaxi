@@ -1,7 +1,5 @@
 package com.cargotaxi.mvc.controller;
 
-import com.cargotaxi.mvc.controller.form.NewCarModelAttribute;
-import com.cargotaxi.mvc.model.CarType;
 import com.cargotaxi.mvc.model.User;
 import com.cargotaxi.mvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

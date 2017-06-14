@@ -30,10 +30,8 @@ public class CarController {
 
     @RequestMapping("/new")
     public String newCar(Model model) {
-        System.out.println("new car is called");
         List<User> users = userService.findAll();
         List<CarType> carTypes = carTypeService.findAll();
-        System.out.println("users - " + users.size());
         model.addAttribute("users", users);
         model.addAttribute("carTypes", carTypes);
         model.addAttribute("newCarModelAttribute", new NewCarModelAttribute());
@@ -41,7 +39,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/saveNewCar", method = RequestMethod.POST)
-    public String saveStudent(@ModelAttribute("newCarModelAttribute")
+    public String saveCar(@ModelAttribute("newCarModelAttribute")
                                       NewCarModelAttribute
                                           newCarModelAttribute, Model model) {
         // logic to process input data
