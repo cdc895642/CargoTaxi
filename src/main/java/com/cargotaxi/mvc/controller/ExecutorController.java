@@ -21,7 +21,6 @@ public class ExecutorController {
 
     @RequestMapping("/find-all")
     public String newCar(Model model) {
-        System.out.println("findall is called");
         List<User> users=userService.findAll();
         List<User> executors=users.stream().filter(user -> user.getCars().size
                 ()>0).collect(Collectors.toList());

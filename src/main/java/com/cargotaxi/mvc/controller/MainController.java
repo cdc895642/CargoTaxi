@@ -16,15 +16,6 @@ public class MainController {
 
     @RequestMapping("/")
     public ModelAndView startPage() {
-        System.out.println("Main is called");
-        User user=new User();
-        user.setLogin("aaa45");
-        user.setPassword("1231rty");
-        user.setEmail("123@frt.com");
-        //user=userRepository.save(user);
-        System.out.println(user.getId()+" - "+user.getLogin());
-        List<User> users=userRepository.findAll();
-        users.forEach(x->System.out.println(x.getLogin()));
         return new ModelAndView("index", "",null);
     }
 }
