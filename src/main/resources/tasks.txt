@@ -1,0 +1,12 @@
+http://blog.codeleak.pl/2013/11/thymeleaf-template-layouts-in-spring.html
+-castom layout
+
+http://spring-projects.ru/guides/handling-form-submission/ - form proccessing
+
+https://github.com/thymeleaf/thymeleafexamples-layouts -
+1) Thymeleaf + Spring MVC
+2 ) Layouts - Companion application for the "Thymeleaf Layouts" article at the
+Thymeleaf website: http://www.thymeleaf.org/documentation.html http://www.thymeleaf.org
+
+example :
+https://github.com/thymeleaf/thymeleafexamples-stsm/blob/2.1-master/src/main/webapp/WEB-INF/templates/seedstartermng.html

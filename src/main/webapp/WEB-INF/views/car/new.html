@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CargoTaxi - Main page</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/css/shop-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <div th:replace="fragments/menu :: menu"></div>
+
+        <div class="col-md-9">
+
+            <div class="thumbnail">
+                <h3><span th:text="#{car.new.title}"/></h3>
+                <div class="caption-full">
+                    <form class="form-horizontal" id="carform"
+                          th:action="@{saveNewCar}" th:object="${newCarModelAttribute}"
+                          method="post">
+
+                        <input type='hidden' name='csrfmiddlewaretoken' value='XFe2rTYl9WOpV8U6X5CfbIuOZOELJ97S'/>
+
+                        <div id="div_id_username" class="form-group required">
+                            <label for="id_user" class="control-label col-md-4  requiredField"> User </label>
+                            <div class="controls col-md-8 ">
+                                <select id="id_user" name="id" form="carform" th:field="*{userId}" class="input-md
+                                 form-control" style="margin-bottom:10px">
+                                    <option th:each="user : ${users}"
+                                            th:value="${user.id}"
+                                            th:text="${user.login}">
+                                        login
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="div_id_car-type" class="form-group required">
+                            <label for="id_car-type" class="control-label col-md-4  requiredField"> User </label>
+                            <div class="controls col-md-8 ">
+                                <select id="id_car-type" name="id" form="carform" th:field="*{carTypeId}"
+                                        class="input-md
+                                 form-control" style="margin-bottom:10px">
+                                    <option th:each="carType : ${carTypes}"
+                                            th:value="${carType.id}"
+                                            th:text="${carType.type}">
+                                        login
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="div_id_description" class="form-group required">
+                            <label for="id_description" class="control-label col-md-4  requiredField">Description</label>
+                            <div class="controls col-md-8 ">
+                                <input class="input-md textInput form-control" id="id_description"
+                                       name="description" style="margin-bottom: 10px"
+                                       type="text" th:field="*{description}"/>
+                            </div>
+                        </div>
+                        <div id="div_id_location" class="form-group required">
+                            <label for="id_location" class="control-label col-md-4  requiredField">Location</label>
+                            <div class="controls col-md-8 ">
+                                <input class="input-md textInput form-control" id="id_location"
+                                       name="description" style="margin-bottom: 10px"
+                                       type="text" th:field="*{location}"/>
+                            </div>
+                        </div>
+                        <div id="div_id_capacity" class="form-group required">
+                            <label for="id_location" class="control-label col-md-4  requiredField">Capacity</label>
+                            <div class="controls col-md-8 ">
+                                <input class="input-md textInput form-control" id="id_capacity"
+                                       name="description" style="margin-bottom: 10px"
+                                       type="text" th:field="*{capacity}"/>
+                            </div>
+                        </div>
+                        <div id="div_id_load" class="form-group required">
+                            <label for="id_location" class="control-label col-md-4  requiredField">Load</label>
+                            <div class="controls col-md-8 ">
+                                <input class="input-md textInput form-control" id="id_load"
+                                       name="description" style="margin-bottom: 10px"
+                                       type="text" th:field="*{load}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="aab controls col-md-4 "></div>
+                            <div class="controls col-md-8 ">
+                                <input type="submit" name="Signup" value="Signup" class="btn btn-primary btn btn-info"
+                                       id="submit-id-signup"/>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer">
+</div>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="/resources/js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/resources/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

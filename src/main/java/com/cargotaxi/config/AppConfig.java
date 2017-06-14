@@ -65,7 +65,7 @@ public class AppConfig {
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         jpaProperties.put("hibernate.show_sql", true);
         jpaProperties.put("hibernate.format_sql", "false");
-        jpaProperties.put("hibernate.hbm2ddl.auto", "update");// validate
+        jpaProperties.put("hibernate.hbm2ddl.auto", "validate");//update validate
 
         em.setJpaProperties(jpaProperties);
         return em;
@@ -78,8 +78,4 @@ public class AppConfig {
         jpa.setEntityManagerFactory(getLocalContainerEntityManagerFactoryBean().getObject());
         return jpa;
     }
-//@Bean
-//public PlatformTransactionManager transactionManager() {
-//    return new DataSourceTransactionManager(getDriverManagerDataSource());
-//}
 }

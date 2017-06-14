@@ -5,11 +5,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
-
-/**
- * Created by cdc89 on 12.06.2017.
- */
 @Entity
 @Table(name = "users")
 public class User {
@@ -32,6 +29,42 @@ public class User {
     @Size(min = 5, max = 30)
     @Column(name = "email", unique = true)
     private String email;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy="executor")
+    private Set<Bid> bids;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy="user")
+    private Set<Order> orders;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy="user")
+    private Set<UserCar> cars;
+
+    public Set<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(Set<Bid> bids) {
+        this.bids = bids;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Set<UserCar> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<UserCar> cars) {
+        this.cars = cars;
+    }
 
     public int getId() {
         return id;

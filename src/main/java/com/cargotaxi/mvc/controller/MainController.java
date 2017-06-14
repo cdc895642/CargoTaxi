@@ -9,9 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-/**
- * Created by cdc89 on 10.06.2017.
- */
 @Controller
 public class MainController {
     @Autowired
@@ -24,10 +21,10 @@ public class MainController {
         user.setLogin("aaa45");
         user.setPassword("1231rty");
         user.setEmail("123@frt.com");
-        user=userRepository.save(user);
+        //user=userRepository.save(user);
         System.out.println(user.getId()+" - "+user.getLogin());
         List<User> users=userRepository.findAll();
         users.forEach(x->System.out.println(x.getLogin()));
-        return new ModelAndView("index.html", "",null);
+        return new ModelAndView("index", "",null);
     }
 }
