@@ -2,7 +2,7 @@ package com.cargotaxi.mvc.controller.form;
 
 import java.math.BigDecimal;
 
-public class NewCarModelAttribute {
+public class NewCarDTO {
     private int userId;
     private int carTypeId;
     private String description;
@@ -10,7 +10,7 @@ public class NewCarModelAttribute {
     private BigDecimal capacity;
     private int load;
 
-    public NewCarModelAttribute(){}
+    public NewCarDTO(){}
 
     public int getUserId() {
         return userId;

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
     <meta charset="utf-8">
@@ -42,6 +44,26 @@
                 <li>
                     <a href="#"><span th:text="#{top.nav.contacts}"/></a>
                 </li>
+            </ul>
+            <!--<div sec:authorize="isAuthenticated()">-->
+                <!--This content is only shown to authenticated users.-->
+            <!--</div>-->
+            <ul class="nav navbar-nav navbar-right">
+                <li  >
+<span sec:authorize="isAuthenticated()" style="color:white">auth</span>
+                </li>
+                <li >
+                    <span sec:authorize="isAnonymous()" style="color:white">
+                        <a href="/signup">Sign up</a>
+                    </span>
+                </li>
+
+                <li>
+
+                </li>
+                <li></li>
+
+
             </ul>
         </div>
 

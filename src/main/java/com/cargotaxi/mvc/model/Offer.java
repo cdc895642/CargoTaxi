@@ -15,7 +15,7 @@ public class Offer {
     private int id;
 
     @NotEmpty
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_car")
     private UserCar userCar;
 

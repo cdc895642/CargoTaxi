@@ -15,6 +15,7 @@
         <servlet.version>3.1.0</servlet.version>
         <!-- Spring -->
         <spring-framework.version>4.3.9.RELEASE</spring-framework.version>
+        <springsecurity.version>4.2.3.RELEASE</springsecurity.version>
         <!--junit-->
         <junit.version>4.12</junit.version>
         <!-- Hibernate / JPA -->
@@ -27,6 +28,7 @@
         <postgresql.version>9.1-901-1.jdbc4</postgresql.version>
         <!-- ThymeLeaf -->
         <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
+        <thymeleafspringsecurity4.version>3.0.2.RELEASE</thymeleafspringsecurity4.version>
     </properties>
 
     <dependencyManagement>
@@ -42,6 +44,36 @@
     </dependencyManagement>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${springsecurity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${springsecurity.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${springsecurity.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>${thymeleafspringsecurity4.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+              <groupId>org.hibernate</groupId>
+              <artifactId>hibernate-jpamodelgen</artifactId>
+              <version>${hibernate.version}</version>
+              <scope>provided</scope>
+        </dependency>
+
         <!-- validation -->
         <dependency>
             <groupId>org.hibernate</groupId>

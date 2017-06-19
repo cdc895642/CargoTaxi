@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CargoTaxi - Main page</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/css/shop-item.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery -->
+    <script src="/resources/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/resources/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div th:replace="fragments/header :: header"></div>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div th:replace="fragments/menu :: menu"></div>
+
+            <div class="col-md-9">
+
+                <div class="thumbnail">
+                    <h3><span th:text="#{car.new.title}"/></h3>
+                    <span th:if="${result != null}" th:text="#{${result}}" style="color:red; font-weight: bold"/>
+                    <div class="caption-full">
+                        <form class="form-horizontal" id="carform"
+                              th:action="@{signup}" th:object="${newUserDTO}"
+                              method="post"  enctype="utf8">
+
+                            <div id="div_id_login" class="form-group required">
+                                <label for="id_login" class="control-label col-md-4  requiredField">Login</label>
+                                <div class="controls col-md-8 ">
+                                    <input class="input-md textInput form-control" id="id_login"
+                                           name="login" style="margin-bottom: 10px"
+                                           type="text" th:field="*{login}"/>
+                                    <p th:each="error: ${#fields.errors('login')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                            <div id="div_id_email" class="form-group required">
+                                <label for="id_email" class="control-label col-md-4  requiredField">Email</label>
+                                <div class="controls col-md-8 ">
+                                    <input class="input-md textInput form-control" id="id_email"
+                                           name="email" style="margin-bottom: 10px"
+                                           type="text" th:field="*{email}"/>
+                                    <p th:each="error: ${#fields.errors('email')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                            <div id="div_id_password" class="form-group required">
+                                <label for="id_password" class="control-label col-md-4  requiredField">Password</label>
+                                <div class="controls col-md-8 ">
+                                    <input class="input-md textInput form-control" id="id_password"
+                                           name="password" style="margin-bottom: 10px"
+                                           type="password" th:field="*{password}"/>
+                                    <p th:each="error: ${#fields.errors('password')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                            <div id="div_id_matching-password" class="form-group required">
+                                <label for="id_matching-password" class="control-label col-md-4  requiredField">Confirm password
+                                </label>
+                                <div class="controls col-md-8 ">
+                                    <input class="input-md textInput form-control" id="id_matching-password"
+                                           name="matching-password" style="margin-bottom: 10px"
+                                           type="password" th:field="*{matchingPassword}"/>
+                                    <p th:each="error: ${#fields.errors('matchingPassword')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+
+                            <div id="div_id_phones" class="form-group required">
+                                <label for="submit-id-new-phone" class="control-label col-md-4  requiredField">Phones</label>
+                                <div class="controls col-md-8 ">
+                                    <input type="submit" name="addRow" value="Add phone"
+                                           class="btn btn-primary btn btn-info"
+                                           style="vertical-align:baseline; background-color:#286090"
+                                           id="submit-id-new-phone"/>
+                                </div>
+                            </div>
+                            <div th:each="number,phoneStat : *{phones}" class="form-group required">
+                                <div class="aab controls col-md-4 "></div>
+                                <div class="controls col-md-8 ">
+                                    <input type="text" class="input-md textInput form-control"
+                                           style="display:inline; width:auto"
+                                           th:field="*{phones[__${phoneStat.index}__].number}" />
+                                    <input type="submit" name="removeRow" value="Remove"
+                                           class="btn btn-primary btn btn-info"
+                                           style="vertical-align:baseline; background-color:#286090"
+                                           />
+                                </div>
+
+                                <p th:each="number,phoneStat : *{phones}"
+                                   th:if="${#fields.hasErrors('phones[__${phoneStat.index}__].number')}"
+                                   th:errors="*{phones[__${phoneStat.index}__].number}">Validation error</p>
+                                <span>=================</span>
+                            </div>
+                            <ul th:if="${#fields.hasErrors('global')}">
+                                <li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>
+                            </ul>
+                            <!--<ul th:if="${#fields.hasErrors('*')}">-->
+                                <!--<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>-->
+                            <!--</ul>-->
+                                <!--<div class="controls col-md-8 ">-->
+                                    <!--<table class="table input-md textInput form-control" id="id_phones">-->
+                                        <!--<thead class="thead-default">-->
+                                        <!--<tr>-->
+                                            <!--<th>№</th>-->
+                                            <!--<th>Phone</th>-->
+                                            <!--<th>-->
+                                                <!--<button type="submit" name="addRow">Add number</button>-->
+                                            <!--</th>-->
+                                        <!--</tr>-->
+                                        <!--</thead>-->
+                                        <!--<tbody>-->
+                                        <!--<tr th:each="number,phoneStat : *{phones}">-->
+                                            <!--<td th:text="${phoneStat.count}">1</td>-->
+
+                                            <!--<td>-->
+                                                <!--<input type="text" th:field="*{phones[__${phoneStat.index}__].number}" />-->
+                                            <!--</td>-->
+                                            <!--<td>-->
+                                                <!--<button type="submit" name="removeRow"-->
+                                                        <!--th:value="${phoneStat.index}" >Remove row</button>-->
+                                            <!--</td>-->
+                                        <!--</tr>-->
+                                        <!--</tbody>-->
+                                    <!--</table>-->
+                                <!--</div>-->
+
+                            <ul>
+                                <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
+                                    <span th:text="${e.global}? '*' : ${e.fieldName}">The field name</span> |
+                                    <span th:text="${e.message}">The error message</span>
+                                </li>
+                            </ul>
+
+                            <div class="form-group">
+                                <div class="aab controls col-md-4 "></div>
+                                <div class="controls col-md-8 ">
+                                    <input type="submit" name="Signup" value="Signup" class="btn btn-primary btn btn-info"
+                                           id="submit-id-signup"/>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer">
+
+</body>
+</html>

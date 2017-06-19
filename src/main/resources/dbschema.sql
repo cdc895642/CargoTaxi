@@ -11,7 +11,7 @@ CREATE TABLE "orders" (
   "description" VARCHAR(2000)  NOT NULL,
   "price"       NUMERIC(12, 2) NOT NULL,
   "private"     BOOLEAN        NOT NULL DEFAULT FALSE,
-  "finished"     BOOLEAN        NOT NULL DEFAULT FALSE,
+  "finished"    BOOLEAN        NOT NULL DEFAULT FALSE,
   CONSTRAINT orders_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS = FALSE
@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS "phones" CASCADE;
 CREATE TABLE "phones" (
   "id"      SERIAL      NOT NULL,
   "user_id" INT         NOT NULL,
-  "phone"   VARCHAR(13) NOT NULL UNIQUE,
+  "number"   VARCHAR(13) NOT NULL UNIQUE,
   CONSTRAINT phones_pk PRIMARY KEY ("id")
 ) WITH (
 OIDS = FALSE
@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS "users" CASCADE;
 CREATE TABLE "users" (
   "id"       SERIAL      NOT NULL,
   "login"    VARCHAR(15) NOT NULL UNIQUE,
-  "password" VARCHAR(30) NOT NULL,
+  "password" VARCHAR(200) NOT NULL,
   "email"    VARCHAR(30) UNIQUE,
   CONSTRAINT users_pk PRIMARY KEY ("id")
 ) WITH (
@@ -132,6 +132,25 @@ OIDS = FALSE
 );
 
 
+DROP TABLE IF EXISTS "roles" CASCADE;
+CREATE TABLE "roles" (
+  "id"   SERIAL      NOT NULL,
+  "role" VARCHAR(10) NOT NULL UNIQUE,
+  CONSTRAINT roles_pk PRIMARY KEY ("id")
+) WITH (
+OIDS = FALSE
+);
+
+
+DROP TABLE IF EXISTS "user_roles" CASCADE;
+CREATE TABLE "user_roles" (
+  "user_id" INT NOT NULL,
+  "role_id" INT NOT NULL
+) WITH (
+OIDS = FALSE
+);
+
+
 ALTER TABLE "orders"
   ADD CONSTRAINT "orders_fk0" FOREIGN KEY ("customer_id")
 REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -172,3 +191,10 @@ RESTRICT ON UPDATE CASCADE;
 ALTER TABLE "offers"
   ADD CONSTRAINT "offers_fk0" FOREIGN KEY ("user_car")
 REFERENCES "user_cars" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE "user_roles"
+  ADD CONSTRAINT "user_roles_fk0" FOREIGN KEY
+  ("user_id") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "user_roles"
+  ADD CONSTRAINT "user_roles_fk1" FOREIGN KEY ("role_id") REFERENCES "roles" ("id")
+ON DELETE RESTRICT ON UPDATE CASCADE;

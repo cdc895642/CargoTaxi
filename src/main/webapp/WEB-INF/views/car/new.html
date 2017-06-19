@@ -43,7 +43,7 @@
                 <h3><span th:text="#{car.new.title}"/></h3>
                 <div class="caption-full">
                     <form class="form-horizontal" id="carform"
-                          th:action="@{saveNewCar}" th:object="${newCarModelAttribute}"
+                          th:action="@{saveNewCar}" th:object="${newCarDTO}"
                           method="post">
 
                         <input type='hidden' name='csrfmiddlewaretoken' value='XFe2rTYl9WOpV8U6X5CfbIuOZOELJ97S'/>

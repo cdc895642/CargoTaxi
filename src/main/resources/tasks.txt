@@ -1,3 +1,9 @@
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/ -Spring
+Data JPA
+
+http://docs.spring.io/spring-data/jpa/docs/1.3.0.RELEASE/reference/html/jpa
+.repositories.html - query creation
+
 http://blog.codeleak.pl/2013/11/thymeleaf-template-layouts-in-spring.html
 -castom layout
 

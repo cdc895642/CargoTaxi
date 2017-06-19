@@ -1,6 +1,6 @@
 package com.cargotaxi.mvc.controller;
 
-import com.cargotaxi.mvc.controller.form.NewCarModelAttribute;
+import com.cargotaxi.mvc.controller.form.NewCarDTO;
 import com.cargotaxi.mvc.model.*;
 import com.cargotaxi.mvc.service.CarService;
 import com.cargotaxi.mvc.service.CarTypeService;
@@ -34,32 +34,32 @@ public class CarController {
         List<CarType> carTypes = carTypeService.findAll();
         model.addAttribute("users", users);
         model.addAttribute("carTypes", carTypes);
-        model.addAttribute("newCarModelAttribute", new NewCarModelAttribute());
+        model.addAttribute("newCarModelAttribute", new NewCarDTO());
         return "car/new";
     }
 
     @RequestMapping(value = "/saveNewCar", method = RequestMethod.POST)
     public String saveCar(@ModelAttribute("newCarModelAttribute")
-                                      NewCarModelAttribute
-                                          newCarModelAttribute, Model model) {
+                                  NewCarDTO
+                                  newCarDTO, Model model) {
         // logic to process input data
         List<User> users = userService.findAll();
         List<CarType> carTypes = carTypeService.findAll();
         model.addAttribute("users", users);
         model.addAttribute("carTypes", carTypes);
-        UserCar userCar=createNewCar(newCarModelAttribute);
+        UserCar userCar=createNewCar(newCarDTO);
         String result = userCar==null ? "error" : "success";
         model.addAttribute("result", result);
         return "car/new";
     }
 
-    private UserCar createNewCar(NewCarModelAttribute newCarModelAttribute){
-        User user=userService.findById(newCarModelAttribute.getUserId());
-        CarType carType=carTypeService.findById(newCarModelAttribute
+    private UserCar createNewCar(NewCarDTO newCarDTO){
+        User user=userService.findById(newCarDTO.getUserId());
+        CarType carType=carTypeService.findById(newCarDTO
                 .getCarTypeId());
         Car car=new Car();
-        car.setLoad(newCarModelAttribute.getLoad());
-        car.setCapacity(newCarModelAttribute.getCapacity());
+        car.setLoad(newCarDTO.getLoad());
+        car.setCapacity(newCarDTO.getCapacity());
         car.setCarType(carType);
         car=carService.create(car);
         if (car==null){
@@ -67,8 +67,8 @@ public class CarController {
         }
         UserCar userCar=new UserCar();
         userCar.setCar(car);
-        userCar.setDescription(newCarModelAttribute.getDescription());
-        userCar.setLocation(newCarModelAttribute.getLocation());
+        userCar.setDescription(newCarDTO.getDescription());
+        userCar.setLocation(newCarDTO.getLocation());
         userCar.setUser(user);
         userCar=userCarService.create(userCar);
         return userCar;

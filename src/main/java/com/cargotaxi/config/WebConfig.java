@@ -19,7 +19,7 @@ public class WebConfig extends
         //create the root Spring application context
         AnnotationConfigWebApplicationContext rootContext = new
                 AnnotationConfigWebApplicationContext();
-        rootContext.register(AppConfig.class);
+        rootContext.register(SecurityConfig.class, DatabaseConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
 

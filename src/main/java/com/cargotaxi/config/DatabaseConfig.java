@@ -21,7 +21,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.cargotaxi.mvc")
 @EnableJpaRepositories(basePackages = "com.cargotaxi.mvc")
 @EnableTransactionManagement
-public class AppConfig {
+public class DatabaseConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();

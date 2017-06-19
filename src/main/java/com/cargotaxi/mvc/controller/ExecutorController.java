@@ -18,10 +18,8 @@ public class ExecutorController {
     UserService userService;
 
     @RequestMapping("/find-all")
-    public String newCar(Model model) {
-        List<User> users=userService.findAll();
-        List<User> executors=users.stream().filter(user -> user.getCars().size
-                ()>0).collect(Collectors.toList());
+    public String findExecutorsAll(Model model) {
+        List<User> executors=userService.findExecutorsAll();
         model.addAttribute("executors",executors);
         return "executor/find";
     }

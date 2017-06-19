@@ -21,7 +21,7 @@ public class User {
     private String login;
 
     @NotEmpty
-    @Size(min = 5, max = 30)
+    @Size(min = 5, max = 200)
     @Column(name = "password")
     private String password;
 
@@ -41,6 +41,29 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
             mappedBy="user")
     private Set<UserCar> cars;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    private Set<Role> roles;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy="user")
+    private Set<Phone> phones;
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 
     public Set<Bid> getBids() {
         return bids;
