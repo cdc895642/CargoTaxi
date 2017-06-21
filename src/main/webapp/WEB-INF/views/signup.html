@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CargoTaxi - Main page</title>
+    <title>CargoTaxi - Register new user</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
         <div class="col-md-9">
 
             <div class="thumbnail">
-                <h3><span th:text="#{car.new.title}"/></h3>
+                <h3><span th:text="#{reg.new.user.title}"/></h3>
                 <span th:if="${result != null}" th:text="#{${result}}" style="color:red; font-weight: bold"/>
                 <div class="caption-full">
                     <form class="form-horizontal" id="carform"
@@ -50,53 +50,29 @@
                           method="post" enctype="utf8">
 
                         <div id="div_id_login" class="form-group required">
-                            <label for="id_login" class="control-label col-md-4  requiredField">Login</label>
+                            <label for="id_login" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{reg.new.user.login}"/></label>
                             <div class="controls col-md-8 ">
                                 <input class="input-md textInput form-control" id="id_login"
                                        name="login" style="margin-bottom: 10px"
                                        type="text" th:field="*{login}"/>
-                                <p th:each="error: ${#fields.errors('login')}"
-                                   th:text="${error}">Validation error</p>
                             </div>
                         </div>
                         <div id="div_id_email" class="form-group required">
-                            <label for="id_email" class="control-label col-md-4  requiredField">Email</label>
+                            <label for="id_email" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{reg.new.user.email}"/></label>
                             <div class="controls col-md-8 ">
                                 <input class="input-md textInput form-control" id="id_email"
                                        name="email" style="margin-bottom: 10px"
                                        type="text" th:field="*{email}"/>
-                                <p th:each="error: ${#fields.errors('email')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                        </div>
-                        <div id="div_id_password" class="form-group required">
-                            <label for="id_password" class="control-label col-md-4  requiredField">Password</label>
-                            <div class="controls col-md-8 ">
-                                <input class="input-md textInput form-control" id="id_password"
-                                       name="password" style="margin-bottom: 10px"
-                                       type="password" th:field="*{password}"/>
-                                <p th:each="error: ${#fields.errors('password')}"
-                                   th:text="${error}">Validation error</p>
-                            </div>
-                        </div>
-                        <div id="div_id_matching-password" class="form-group required">
-                            <label for="id_matching-password" class="control-label col-md-4  requiredField">Confirm
-                                password
-                            </label>
-                            <div class="controls col-md-8 ">
-                                <input class="input-md textInput form-control" id="id_matching-password"
-                                       name="matching-password" style="margin-bottom: 10px"
-                                       type="password" th:field="*{matchingPassword}"/>
-                                <p th:each="error: ${#fields.errors('matchingPassword')}"
-                                   th:text="${error}">Validation error</p>
                             </div>
                         </div>
 
                         <div id="div_id_phones" class="form-group required">
                             <label for="submit-id-new-phone"
-                                   class="control-label col-md-4  requiredField">Phones</label>
+                                   class="control-label col-md-4  requiredField"><span th:text="#{reg.new.user.phones}"/></label>
                             <div class="controls col-md-8 ">
-                                <input type="submit" name="addPhone" value="Add phone"
+                                <input type="submit" name="addPhone" th:value="#{reg.new.user.phone.add}"
                                        class="btn btn-primary btn btn-info"
                                        style="vertical-align:baseline; background-color:#286090"
                                        id="submit-id-new-phone"/>
@@ -108,71 +84,53 @@
                                 <input type="text" class="input-md textInput form-control"
                                        style="display:inline; width:auto"
                                        th:field="*{phones[__${phoneStat.index}__].number}"/>
-                                <!--<input type="submit" name="removePhone" value="Remove"-->
-                                <!--class="btn btn-primary btn btn-info"-->
-                                <!--style="vertical-align:baseline; background-color:#286090"-->
-                                <!--/>-->
+
                                 <button type="submit" name="removePhone"
                                         class="btn btn-primary btn btn-info"
                                         style="vertical-align:baseline; background-color:#286090"
-                                        th:value="${phoneStat.index}">Remove row
+                                        th:value="${phoneStat.index}"><span th:text="#{reg.new.user.phone.remove}"/>
                                 </button>
                             </div>
-
-                            <!--<p th:each="number,phoneStat : *{phones}"-->
-                               <!--th:if="${#fields.hasErrors('phones[__${phoneStat.index}__].number')}"-->
-                               <!--th:errors="*{phones[__${phoneStat.index}__].number}">Validation error</p>-->
-                            <!--<span>=================</span>-->
                         </div>
-                            <!--<ul th:if="${#fields.hasErrors('global')}">-->
-                                <!--<li th:each="err : ${#fields.errors('global')}" th:text="${err}">Input is incorrect</li>-->
-                            <!--</ul>-->
-                        <!--<ul th:if="${#fields.hasErrors('*')}">-->
-                        <!--<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>-->
-                        <!--</ul>-->
-                        <!--<div class="controls col-md-8 ">-->
-                        <!--<table class="table input-md textInput form-control" id="id_phones">-->
-                        <!--<thead class="thead-default">-->
-                        <!--<tr>-->
-                        <!--<th>№</th>-->
-                        <!--<th>Phone</th>-->
-                        <!--<th>-->
-                        <!--<button type="submit" name="addRow">Add number</button>-->
-                        <!--</th>-->
-                        <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                        <!--<tr th:each="number,phoneStat : *{phones}">-->
-                        <!--<td th:text="${phoneStat.count}">1</td>-->
 
-                        <!--<td>-->
-                        <!--<input type="text" th:field="*{phones[__${phoneStat.index}__].number}" />-->
-                        <!--</td>-->
-                        <!--<td>-->
-                        <!--<button type="submit" name="removeRow"-->
-                        <!--th:value="${phoneStat.index}" >Remove row</button>-->
-                        <!--</td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                        <!--</table>-->
-                        <!--</div>-->
-
-                        <ul>
-                            <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
-                                <!--<span th:text="${e.global}? '*' : ${e.fieldName}">The field name</span> |-->
-                                <span th:text="${e.message}">The error message</span>
-                            </li>
-                        </ul>
+                        <div id="div_id_password" class="form-group required">
+                            <label for="id_password" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{reg.new.user.password}"/></label>
+                            <div class="controls col-md-8 ">
+                                <input class="input-md textInput form-control" id="id_password"
+                                       name="password" style="margin-bottom: 10px"
+                                       type="password" th:field="*{password}"/>
+                            </div>
+                        </div>
+                        <div id="div_id_matching-password" class="form-group required">
+                            <label for="id_matching-password" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{reg.new.user.confirm_password}"/>
+                            </label>
+                            <div class="controls col-md-8 ">
+                                <input class="input-md textInput form-control" id="id_matching-password"
+                                       name="matching-password" style="margin-bottom: 10px"
+                                       type="password" th:field="*{matchingPassword}"/>
+                                <p th:each="error: ${#fields.errors('matchingPassword')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <div class="aab controls col-md-4 "></div>
                             <div class="controls col-md-8 ">
-                                <input type="submit" name="Signup" value="Signup" class="btn btn-primary btn btn-info"
+                                <input type="submit" name="Signup" th:value="#{reg.new.user.signup}" class="btn btn-primary btn btn-info"
                                        id="submit-id-signup"/>
                             </div>
                         </div>
 
+                        <ul>
+                            <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
+                                <span th:text="${e.message}">The error message</span>
+                            </li>
+                        </ul>
+
                     </form>
+
                 </div>
             </div>
 

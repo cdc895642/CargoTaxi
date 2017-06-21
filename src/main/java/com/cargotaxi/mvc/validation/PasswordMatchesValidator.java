@@ -5,9 +5,6 @@ import com.cargotaxi.mvc.controller.form.NewUserDTO;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-/**
- * Created by cdc89 on 18.06.2017.
- */
 public class PasswordMatchesValidator implements
         ConstraintValidator<PasswordMatches, Object> {
     @Override

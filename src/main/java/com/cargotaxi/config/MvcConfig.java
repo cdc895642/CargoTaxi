@@ -24,9 +24,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 
 @EnableWebMvc
 @Configuration
@@ -61,9 +59,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter implements
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(templateResolver());
         engine.addDialect(new SpringSecurityDialect());
-//        final Set<IDialect> dialects = new HashSet<IDialect>();
-//        dialects.add( new SpringSecurityDialect() );
-//        engine.setDialects( dialects );
         return engine;
     }
 

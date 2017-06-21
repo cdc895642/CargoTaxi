@@ -8,18 +8,20 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-@PasswordMatches
+/**
+ * use for save and validate input data about user for registration
+ */
+@PasswordMatches(message = "{valid.error.register.password.match}")
 public class NewUserDTO {
     @Size(min = 5, max = 15, message = "{valid.error.register.login.size}")
     private String login;
 
-    @Size(min = 5, max = 30)
+    @Size(min = 5, max = 30, message = "{valid.error.register.password.size}")
     private String password;
 
-    @Size(min = 5, max = 30)
     private String matchingPassword;
 
-    @Email
+    @Email(message = "{valid.error.register.email}")
     private String email;
 
     @Valid

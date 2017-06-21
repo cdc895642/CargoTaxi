@@ -2,10 +2,7 @@ package com.cargotaxi.mvc.controller;
 
 import com.cargotaxi.mvc.controller.form.NewCarDTO;
 import com.cargotaxi.mvc.model.*;
-import com.cargotaxi.mvc.service.CarService;
-import com.cargotaxi.mvc.service.CarTypeService;
-import com.cargotaxi.mvc.service.UserCarService;
-import com.cargotaxi.mvc.service.UserService;
+import com.cargotaxi.mvc.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +17,7 @@ import java.util.List;
 public class CarController {
 
     @Autowired
-    UserService userService;
+    UserService<User> userService;
     @Autowired
     CarTypeService carTypeService;
     @Autowired
@@ -54,7 +51,7 @@ public class CarController {
     }
 
     private UserCar createNewCar(NewCarDTO newCarDTO){
-        User user=userService.findById(newCarDTO.getUserId());
+        User user= userService.findById(newCarDTO.getUserId());
         CarType carType=carTypeService.findById(newCarDTO
                 .getCarTypeId());
         Car car=new Car();
