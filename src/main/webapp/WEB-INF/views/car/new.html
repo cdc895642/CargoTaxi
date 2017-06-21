@@ -45,11 +45,8 @@
                     <form class="form-horizontal" id="carform"
                           th:action="@{saveNewCar}" th:object="${newCarDTO}"
                           method="post">
-
-                        <input type='hidden' name='csrfmiddlewaretoken' value='XFe2rTYl9WOpV8U6X5CfbIuOZOELJ97S'/>
-
                         <div id="div_id_username" class="form-group required">
-                            <label for="id_user" class="control-label col-md-4  requiredField"> User </label>
+                            <label for="id_user" class="control-label col-md-4  requiredField"> <span th:text="#{car.new.user}"/> </label>
                             <div class="controls col-md-8 ">
                                 <select id="id_user" name="id" form="carform" th:field="*{userId}" class="input-md
                                  form-control" style="margin-bottom:10px">
@@ -62,7 +59,7 @@
                             </div>
                         </div>
                         <div id="div_id_car-type" class="form-group required">
-                            <label for="id_car-type" class="control-label col-md-4  requiredField"> User </label>
+                            <label for="id_car-type" class="control-label col-md-4  requiredField"> <span th:text="#{car.new.car.type}"/> </label>
                             <div class="controls col-md-8 ">
                                 <select id="id_car-type" name="id" form="carform" th:field="*{carTypeId}"
                                         class="input-md
