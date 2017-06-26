@@ -8,8 +8,13 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support
         .AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.*;
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 import java.util.EnumSet;
+
 
 public class WebConfig extends
         AbstractAnnotationConfigDispatcherServletInitializer {
@@ -50,7 +55,6 @@ public class WebConfig extends
                 ("dispatcher", dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
-
     }
 
     @Override

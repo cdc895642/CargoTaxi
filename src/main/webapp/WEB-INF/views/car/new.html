@@ -45,21 +45,10 @@
                     <form class="form-horizontal" id="carform"
                           th:action="@{saveNewCar}" th:object="${newCarDTO}"
                           method="post">
-                        <div id="div_id_username" class="form-group required">
-                            <label for="id_user" class="control-label col-md-4  requiredField"> <span th:text="#{car.new.user}"/> </label>
-                            <div class="controls col-md-8 ">
-                                <select id="id_user" name="id" form="carform" th:field="*{userId}" class="input-md
-                                 form-control" style="margin-bottom:10px">
-                                    <option th:each="user : ${users}"
-                                            th:value="${user.id}"
-                                            th:text="${user.login}">
-                                        login
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div id="div_id_car-type" class="form-group required">
-                            <label for="id_car-type" class="control-label col-md-4  requiredField"> <span th:text="#{car.new.car.type}"/> </label>
+                            <label for="id_car-type" class="control-label col-md-4  requiredField"> <span
+                                    th:text="#{car.new.car.type}"/> </label>
                             <div class="controls col-md-8 ">
                                 <select id="id_car-type" name="id" form="carform" th:field="*{carTypeId}"
                                         class="input-md
@@ -72,43 +61,96 @@
                                 </select>
                             </div>
                         </div>
+
                         <div id="div_id_description" class="form-group required">
-                            <label for="id_description" class="control-label col-md-4  requiredField">Description</label>
+                            <label for="id_description" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{car.new.car.description}"/></label>
                             <div class="controls col-md-8 ">
                                 <input class="input-md textInput form-control" id="id_description"
                                        name="description" style="margin-bottom: 10px"
                                        type="text" th:field="*{description}"/>
                             </div>
                         </div>
+
                         <div id="div_id_location" class="form-group required">
-                            <label for="id_location" class="control-label col-md-4  requiredField">Location</label>
+                            <label for="id_location" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{car.new.car.location}"/></label>
                             <div class="controls col-md-8 ">
                                 <input class="input-md textInput form-control" id="id_location"
-                                       name="description" style="margin-bottom: 10px"
+                                       name="location" style="margin-bottom: 10px"
                                        type="text" th:field="*{location}"/>
                             </div>
                         </div>
+
                         <div id="div_id_capacity" class="form-group required">
-                            <label for="id_location" class="control-label col-md-4  requiredField">Capacity</label>
+                            <label for="id_capacity" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{car.new.car.capacity}"/></label>
                             <div class="controls col-md-8 ">
                                 <input class="input-md textInput form-control" id="id_capacity"
-                                       name="description" style="margin-bottom: 10px"
+                                       name="capacity" style="margin-bottom: 10px"
                                        type="text" th:field="*{capacity}"/>
                             </div>
                         </div>
+
                         <div id="div_id_load" class="form-group required">
-                            <label for="id_location" class="control-label col-md-4  requiredField">Load</label>
+                            <label for="id_load" class="control-label col-md-4  requiredField"><span
+                                    th:text="#{car.new.car.load}"/></label>
                             <div class="controls col-md-8 ">
                                 <input class="input-md textInput form-control" id="id_load"
-                                       name="description" style="margin-bottom: 10px"
+                                       name="load" style="margin-bottom: 10px"
                                        type="text" th:field="*{load}"/>
                             </div>
                         </div>
 
+                        <div class="thumbnail" style="padding:10px">
+                            <div id="div_id_offers" class="form-group required">
+                                <label for="submit-id-new-offer"
+                                       class="control-label col-md-4  requiredField"><span
+                                        th:text="#{car.new.offers.title}"/> : </label>
+                                <div class="controls col-md-8 ">
+                                    <input type="submit" name="addOffer" th:value="#{car.new.offer.add}"
+                                           class="btn btn-primary btn btn-info"
+                                           style="vertical-align:baseline; background-color:#286090"
+                                           id="submit-id-new-offer"/>
+                                </div>
+                            </div>
+
+                            <div th:each="offer,offerStat : *{offers}" class="form-group required thumbnail"
+                                 style="margin:10px; padding:10px">
+
+                                <div class="form-group required">
+                                    <label class="control-label col-md-4  requiredField"><span
+                                            th:text="#{car.new.offer.price}"/></label>
+                                    <div class="controls col-md-8 ">
+                                        <input type="text" class="input-md textInput form-control"
+                                               style="display:inline; width:auto"
+                                               th:field="*{offers[__${offerStat.index}__].price}"/>
+                                        <button type="submit" name="removeOffer"
+                                                class="btn btn-primary btn btn-info"
+                                                style="vertical-align:baseline; background-color:#286090"
+                                                th:value="${offerStat.index}"><span th:text="#{car.new.offer.remove}"/>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="control-label col-md-4  requiredField"><span
+                                            th:text="#{car.new.offer.description}"/></label>
+                                    <div class="controls col-md-7 ">
+                                        <input type="text" class="input-md textInput form-control"
+                                               style="margin-bottom: 10px"
+                                               th:field="*{offers[__${offerStat.index}__].description}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="form-group">
                             <div class="aab controls col-md-4 "></div>
                             <div class="controls col-md-8 ">
-                                <input type="submit" name="Signup" value="Signup" class="btn btn-primary btn btn-info"
+                                <input type="submit" name="Signup" th:value="#{car.new.button.add}"
+                                       class="btn btn-primary btn btn-info"
                                        id="submit-id-signup"/>
                             </div>
                         </div>

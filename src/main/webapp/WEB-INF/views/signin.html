@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CargoTaxi - Register new user</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/css/shop-item.css" rel="stylesheet">
+    <link href="/resources/css/signin.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery -->
+    <script src="/resources/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/resources/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+
+    <div class="row">
+
+        <div th:replace="fragments/menu :: menu"></div>
+
+        <div class="col-md-9">
+
+                <div class="card card-container">
+                    <h2 class='login_title text-center'><span th:text="#{signin.title}"/></h2>
+                    <hr>
+                    <p th:if="${loginError}" class="error"><span th:text="#{error.login}"/></p>
+                    <form th:action="@{/signin.html}" method="post" class="form-signin">
+                        <label for="username" class="input_title"><span th:text="#{signin.username}"/></label>:
+                        <input type="text" id="username" name="username" autofocus="autofocus" class="login_box"/> <br />
+                        <label for="password" class="input_title"><span th:text="#{signin.password}"/></label>:
+                        <input type="password" id="password" name="password" class="login_box"/> <br />
+                        <input type="submit" th:value="#{signin.button.submit}" class="btn btn-lg btn-primary"/>
+                    </form>
+
+                </div><!-- /card-container -->
+
+
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer">
+
+</body>
+</html>

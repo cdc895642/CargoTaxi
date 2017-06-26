@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 
 @Service
 public class PhoneServiceImpl extends AbstractServiceImpl<Phone> implements
-        PhoneService<Phone>{
+        PhoneService{
     @Autowired
     private PhoneRepository phoneRepository;
 

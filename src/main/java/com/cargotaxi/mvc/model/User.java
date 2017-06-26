@@ -5,50 +5,26 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+public class User implements Serializable{
+
     private int id;
-
-    @NotEmpty
-    @Size(min = 5, max = 15)
-    @Column(name = "login", unique = true)
     private String login;
-
-    @NotEmpty
-    @Size(min = 5, max = 200)
-    @Column(name = "password")
     private String password;
-
-    @Email
-    @Size(min = 5, max = 30)
-    @Column(name = "email", unique = true)
     private String email;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-            mappedBy="executor")
     private Set<Bid> bids;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-            mappedBy="user")
     private Set<Order> orders;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-            mappedBy="user")
     private Set<UserCar> cars;
-
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
-    private Set<Role> roles;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-            mappedBy="user")
+    private Set<Role> roles=new HashSet<>();
     private Set<Phone> phones;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy = "user")
     public Set<Phone> getPhones() {
         return phones;
     }
@@ -57,6 +33,12 @@ public class User {
         this.phones = phones;
     }
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name = "user_roles",
+            //foreign key
+            joinColumns = {@JoinColumn(name = "user_id")},
+            //foreign key for other side
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     public Set<Role> getRoles() {
         return roles;
     }
@@ -65,6 +47,8 @@ public class User {
         this.roles = roles;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy = "executor")
     public Set<Bid> getBids() {
         return bids;
     }
@@ -73,6 +57,8 @@ public class User {
         this.bids = bids;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy = "user")
     public Set<Order> getOrders() {
         return orders;
     }
@@ -81,6 +67,8 @@ public class User {
         this.orders = orders;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+            mappedBy = "user")
     public Set<UserCar> getCars() {
         return cars;
     }
@@ -89,6 +77,9 @@ public class User {
         this.cars = cars;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -97,6 +88,9 @@ public class User {
         this.id = id;
     }
 
+    @NotEmpty
+    @Size(min = 5, max = 15)
+    @Column(name = "login", unique = true)
     public String getLogin() {
         return login;
     }
@@ -105,6 +99,9 @@ public class User {
         this.login = login;
     }
 
+    @NotEmpty
+    @Size(min = 5, max = 200)
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -113,6 +110,9 @@ public class User {
         this.password = password;
     }
 
+    @Email
+    @Size(min = 5, max = 30)
+    @Column(name = "email", unique = true)
     public String getEmail() {
         return email;
     }

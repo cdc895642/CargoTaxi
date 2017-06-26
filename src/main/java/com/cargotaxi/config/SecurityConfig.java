@@ -16,27 +16,25 @@ import org.springframework.security.config.annotation.web.configuration
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.
-                csrf().disable().
-                authorizeRequests().and()
-                .formLogin().loginPage("/login.html").permitAll().usernameParameter("j_username")
-                .passwordParameter("j_password").loginProcessingUrl("/j_spring_security_check").failureUrl("/login.html?error=true")
+        http
+                .csrf().disable()
+                .authorizeRequests().and()
+                .formLogin().loginPage("/signin.html").permitAll()
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .failureUrl("/signin-error.html")
                 .and()
-                .authorizeRequests().antMatchers("/**/new").hasAnyRole()
+                .authorizeRequests().antMatchers("/**/new")
+                .authenticated()
                 .antMatchers("/admin/**").   hasRole("ADMIN")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")

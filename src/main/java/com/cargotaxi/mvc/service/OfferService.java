@@ -1,4 +1,6 @@
 package com.cargotaxi.mvc.service;
 
-public class OfferService {
+import com.cargotaxi.mvc.model.Offer;
+
+public interface OfferService extends AbstractService<Offer>{
 }

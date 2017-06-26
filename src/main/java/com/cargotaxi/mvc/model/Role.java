@@ -1,32 +1,22 @@
 package com.cargotaxi.mvc.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role  implements Serializable {
+
+    private int id;
+    private String role;
+    private Set<User> users=new HashSet<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
-    private int id;
-
-    @NotNull
-    @Column(name = "role", unique = true)
-    private String role;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
-            //foreign key
-            joinColumns = {@JoinColumn(name = "role_id")},
-            //foreign key for other side
-            inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> users;
-
     public int getId() {
         return id;
     }
@@ -35,6 +25,8 @@ public class Role {
         this.id = id;
     }
 
+    @NotNull
+    @Column(name = "role", unique = true)
     public String getRole() {
         return role;
     }
@@ -43,6 +35,7 @@ public class Role {
         this.role = role;
     }
 
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY, mappedBy = "roles")
     public Set<User> getUsers() {
         return users;
     }

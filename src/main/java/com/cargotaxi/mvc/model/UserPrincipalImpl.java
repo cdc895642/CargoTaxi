@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserPrincipalImpl  implements UserDetails {
+public class UserPrincipalImpl  implements UserDetails{
     private User user;
 
     public UserPrincipalImpl(User user) {

@@ -47,6 +47,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAuthenticated()">
+                    <a href="#"><span sec:authentication="name"/></a>
+                </li>
                 <li sec:authorize="isAnonymous()">
                         <a href="/signup"><span th:text="#{top.nav.signup}"/></a>
                 </li>

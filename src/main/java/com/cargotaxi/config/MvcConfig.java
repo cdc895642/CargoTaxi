@@ -16,7 +16,6 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -81,12 +80,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter implements
                 (RESOURCES_LOCATION);
     }
 
-    @Override
-    public void configureDefaultServletHandling
-            (DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
@@ -103,7 +96,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter implements
         localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
-
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

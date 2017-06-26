@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     MessageSource messageSource;
     @Autowired
-    PhoneService<Phone> phoneService;
+    PhoneService phoneService;
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String registerUserAccount(@ModelAttribute("newUserDTO") @Valid

@@ -149,6 +149,8 @@ CREATE TABLE "user_roles" (
 ) WITH (
 OIDS = FALSE
 );
+ALTER TABLE public.user_roles ADD id SERIAL NOT NULL;
+ALTER TABLE public.user_roles ADD CONSTRAINT user_roles_id_pk PRIMARY KEY (id);
 
 
 ALTER TABLE "orders"

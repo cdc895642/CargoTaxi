@@ -1,6 +1,8 @@
 package com.cargotaxi.mvc.controller.form;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewCarDTO {
     private int userId;
@@ -9,8 +11,17 @@ public class NewCarDTO {
     private String location;
     private BigDecimal capacity;
     private int load;
+    private List<OfferDTO> offers=new ArrayList<>();
 
     public NewCarDTO(){}
+
+    public List<OfferDTO> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<OfferDTO> offers) {
+        this.offers = offers;
+    }
 
     public int getUserId() {
         return userId;

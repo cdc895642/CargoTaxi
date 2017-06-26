@@ -3,30 +3,23 @@ package com.cargotaxi.mvc.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "offers")
-public class Offer {
+public class Offer  implements Serializable {
+
+    private int id;
+    private UserCar userCar;
+    private String description;
+    private BigDecimal price;
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
-    private int id;
-
-    @NotEmpty
-    @ManyToOne
-    @JoinColumn(name = "user_car")
-    private UserCar userCar;
-
-    @Column(name = "description")
-    @Size(max = 2000)
-    private String description;
-
-    @NotEmpty
-    @Column ( name="price", precision = 12, scale = 2)
-    private BigDecimal price;
-
     public int getId() {
         return id;
     }
@@ -35,6 +28,9 @@ public class Offer {
         this.id = id;
     }
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_car")
     public UserCar getUserCar() {
         return userCar;
     }
@@ -43,6 +39,8 @@ public class Offer {
         this.userCar = userCar;
     }
 
+    @Column(name = "description")
+    @Size(max = 2000)
     public String getDescription() {
         return description;
     }
@@ -51,6 +49,8 @@ public class Offer {
         this.description = description;
     }
 
+    @NotNull
+    @Column ( name="price", precision = 12, scale = 2)
     public BigDecimal getPrice() {
         return price;
     }

@@ -110,8 +110,6 @@
                                 <input class="input-md textInput form-control" id="id_matching-password"
                                        name="matching-password" style="margin-bottom: 10px"
                                        type="password" th:field="*{matchingPassword}"/>
-                                <p th:each="error: ${#fields.errors('matchingPassword')}"
-                                   th:text="${error}">Validation error</p>
                             </div>
                         </div>
 
