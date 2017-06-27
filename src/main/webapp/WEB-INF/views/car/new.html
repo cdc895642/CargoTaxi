@@ -42,6 +42,7 @@
             <div class="thumbnail">
                 <h3><span th:text="#{car.new.title}"/></h3>
                 <div class="caption-full">
+
                     <form class="form-horizontal" id="carform"
                           th:action="@{saveNewCar}" th:object="${newCarDTO}"
                           method="post">
