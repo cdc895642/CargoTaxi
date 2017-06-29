@@ -1,5 +1,6 @@
 package com.cargotaxi.mvc.service;
 
+import com.cargotaxi.mvc.controller.form.FindCarDTO;
 import com.cargotaxi.mvc.controller.form.NewCarDTO;
 import com.cargotaxi.mvc.controller.form.OfferDTO;
 import com.cargotaxi.mvc.dao.OfferRepository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.security.Principal;
+import java.util.List;
 
 @Service
 public class UserCarServiceImpl  extends AbstractServiceImpl<UserCar> implements

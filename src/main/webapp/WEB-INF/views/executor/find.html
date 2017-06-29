@@ -41,119 +41,123 @@
         <div class="col-md-9">
 
             <div class="thumbnail">
-                <h3><span >Поиск исполнителей</span></h3>
+                <h3><span th:text="#{find.executor.title}"/></h3>
                 <div class="caption-full">
 
                     <div class="form-section">
-                        <!--<div class="row">-->
-                            <form role="form">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="location">Location</label>
-                                            <input type="email" class="form-control" id="location1" placeholder="Where ?">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="checkin">Check in</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="checkin1" placeholder="Check in">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="checkout">Check out</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" id="checkout1" placeholder="Check out">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label class="sr-only" for="guest">Guest</label>
-                                            <select id="guest1" name="guest" class="form-control">
-                                                <option value="1">1 Guest</option>
-                                                <option value="2">2 Guests</option>
-                                                <option value="3">3 Guests</option>
-                                                <option value="4">4 Guests</option>
-                                                <option value="5">5 Guests</option>
-                                                <option value="6">6 Guests</option>
-                                                <option value="7">7 Guests</option>
-                                                <option value="8">8 Guests</option>
-                                                <option value="9">9 Guests</option>
-                                                <option value="10">10 Guests</option>
-                                                <option value="11">11 Guests</option>
-                                                <option value="12">12 Guests</option>
-                                                <option value="13">13 Guests</option>
-                                                <option value="14">14 Guests</option>
-                                                <option value="15">15 Guests</option>
-                                                <option value="16">16+ Guests</option>
-                                            </select>
-                                        </div>
-                                    </div>
 
+                        <form th:action="@{find-all}" th:object="${findCarDTO}">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only"
+                                               for="carType"><span th:text="#{find.executor.form.carType}"/></label>
+                                        <select id="carType" name="id" th:field="*{carTypeId}"
+                                                class="input-md form-control" style="margin-bottom:10px">
+                                            <option th:value="#{car.new.car.type.all.value}"
+                                                    th:text="#{car.new.car.type.all}" ></option>
+                                            <option th:each="carType : ${carTypes}"
+                                                    th:value="${carType.id}"
+                                                    th:text="${carType.type}">
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="row">
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="location">Location</label>
-                                                <input type="email" class="form-control" id="location" placeholder="Where ?">
-                                            </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="minCapacity"><span
+                                                th:text="#{find.executor.form.minCapacity}"/></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="minCapacity" name="minCapacity"
+                                                   th:placeholder="#{find.executor.form.minCapacity}"
+                                                   th:field="*{minCapacity}"/>
+                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                                         </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="checkin">Check in</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="checkin" placeholder="Check in">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="checkout">Check out</label>
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control" id="checkout" placeholder="Check out">
-                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="sr-only" for="guest">Guest</label>
-                                                <select id="guest" name="guest" class="form-control">
-                                                    <option value="1">1 Guest</option>
-                                                    <option value="2">2 Guests</option>
-                                                    <option value="3">3 Guests</option>
-                                                    <option value="4">4 Guests</option>
-                                                    <option value="5">5 Guests</option>
-                                                    <option value="6">6 Guests</option>
-                                                    <option value="7">7 Guests</option>
-                                                    <option value="8">8 Guests</option>
-                                                    <option value="9">9 Guests</option>
-                                                    <option value="10">10 Guests</option>
-                                                    <option value="11">11 Guests</option>
-                                                    <option value="12">12 Guests</option>
-                                                    <option value="13">13 Guests</option>
-                                                    <option value="14">14 Guests</option>
-                                                    <option value="15">15 Guests</option>
-                                                    <option value="16">16+ Guests</option>
-                                                </select>
-                                            </div>
-
+                                    </div>
                                 </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="minLoad"><span
+                                                th:text="#{find.executor.form.minLoad}"/></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="minLoad" name="minLoad"
+                                                   th:placeholder="#{find.executor.form.minLoad}"
+                                                   th:field="*{minLoad}"/>
+                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="minPrice"><span
+                                                th:text="#{find.executor.form.minPrice}"/></label>
+                                        <input type="text" class="form-control" id="minPrice" name="minPrice"
+                                               th:placeholder="#{find.executor.form.minPrice}" th:field="*{minPrice}"/>
+                                        <!--<select id="guest1" name="guest" class="form-control">-->
+                                        <!--<option value="1">1 Guest</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="dislocation"><span
+                                                th:text="#{find.executor.form.dislocation}"/></label>
+                                        <input type="email" class="form-control" id="dislocation"
+                                               name="dislocation" th:placeholder="#{find.executor.form.dislocation}"
+                                               th:field="*{dislocation}"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="maxCapacity"><span
+                                                th:text="#{find.executor.form.maxCapacity}"/></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="maxCapacity" name="maxCapacity"
+                                                   th:placeholder="#{find.executor.form.maxCapacity}"
+                                                   th:field="*{maxCapacity}"/>
+                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="maxLoad"><span
+                                                th:text="#{find.executor.form.maxLoad}"/></label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="maxLoad" name="maxLoad"
+                                                   th:placeholder="#{find.executor.form.maxLoad}"
+                                                   th:field="*{maxLoad}"/>
+                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="maxPrice"><span
+                                                th:text="#{find.executor.form.maxPrice}"/></label>
+                                        <input type="text" class="form-control" id="maxPrice" name="maxPrice"
+                                               th:placeholder="#{find.executor.form.maxPrice}" th:field="*{maxPrice}"/>
+                                        <!--<select id="guest1" name="guest" class="form-control">-->
+                                        <!--<option value="1">1 Guest</option>-->
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="col-md-10"></div>
                                     <div class="col-md-2">
-                                        <button type="submit" class="btn btn-default btn-primary">Search</button>
+                                        <button type="submit" class="btn btn-default btn-primary"
+                                                name="Find"
+                                                th:value="#{find.executor.form.button}">
+                                            <span th:text="#{find.executor.form.button}"/>
+                                        </button>
                                     </div>
                                 </div>
-                            </form>
+                        </form>
                         <!--</div>-->
                     </div>
 

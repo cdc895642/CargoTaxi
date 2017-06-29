@@ -18,6 +18,9 @@
         <springsecurity.version>4.2.3.RELEASE</springsecurity.version>
         <!--junit-->
         <junit.version>4.12</junit.version>
+        <!--selenium-->
+        <selenium.version>3.4.0</selenium.version>
+        <htmlunit.version>2.27</htmlunit.version>
         <!-- Hibernate / JPA -->
         <hibernate.version>5.2.10.Final</hibernate.version>
         <hibernate.validation.version>5.4.1.Final</hibernate.validation.version>
@@ -44,6 +47,16 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>${htmlunit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
