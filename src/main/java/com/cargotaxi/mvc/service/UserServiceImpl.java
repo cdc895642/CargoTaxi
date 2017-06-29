@@ -134,7 +134,10 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
                 predicates.add(builder.le(userCarJoin.get("car").get
                         ("capacity"), findCarDTO.getMaxCapacity()));
             }
-            if (findCarDTO.getCarTypeId() == 1) {
+            if (findCarDTO.getCarTypeId() == -1) {
+                //find all types
+            } else {
+                //predicates
             }
             query.distinct(true);
             return builder.and(predicates.toArray(new Predicate[predicates

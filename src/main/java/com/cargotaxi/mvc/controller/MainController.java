@@ -26,7 +26,6 @@ public class MainController {
         HashMap<String, String> encodePasswords=new HashMap<>();
         users.forEach(x->encodePasswords.put(x.getLogin(),
                 passwordEncoder.encode(x.getPassword())));
-
         return new ModelAndView("index", "passwords",encodePasswords);
     }
 }

@@ -43,7 +43,7 @@ public class AddCarTest {
     private void addCars(WebDriver driver) {
         WebElement element = driver.findElement(By.id(CAR_TYPE_SELECT_ID));
         Select select = new Select(element);
-        int countCarbyType= Random();
+        int countCarbyType= new Random().nextInt(3)+1;
         for (int x=0; x<CAR_TYPE_COUNT;x++){
             select.selectByIndex(x);
         }

@@ -54,8 +54,8 @@
                                                for="carType"><span th:text="#{find.executor.form.carType}"/></label>
                                         <select id="carType" name="id" th:field="*{carTypeId}"
                                                 class="input-md form-control" style="margin-bottom:10px">
-                                            <option th:value="#{car.new.car.type.all.value}"
-                                                    th:text="#{car.new.car.type.all}" ></option>
+                                            <option th:value="#{car.type.select.all.value}"
+                                                    th:text="#{car.type.select.all.text}" ></option>
                                             <option th:each="carType : ${carTypes}"
                                                     th:value="${carType.id}"
                                                     th:text="${carType.type}">
@@ -71,7 +71,6 @@
                                             <input type="text" class="form-control" id="minCapacity" name="minCapacity"
                                                    th:placeholder="#{find.executor.form.minCapacity}"
                                                    th:field="*{minCapacity}"/>
-                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +82,6 @@
                                             <input type="text" class="form-control" id="minLoad" name="minLoad"
                                                    th:placeholder="#{find.executor.form.minLoad}"
                                                    th:field="*{minLoad}"/>
-                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -93,8 +91,6 @@
                                                 th:text="#{find.executor.form.minPrice}"/></label>
                                         <input type="text" class="form-control" id="minPrice" name="minPrice"
                                                th:placeholder="#{find.executor.form.minPrice}" th:field="*{minPrice}"/>
-                                        <!--<select id="guest1" name="guest" class="form-control">-->
-                                        <!--<option value="1">1 Guest</option>-->
                                         </select>
                                     </div>
                                 </div>
@@ -119,7 +115,6 @@
                                             <input type="text" class="form-control" id="maxCapacity" name="maxCapacity"
                                                    th:placeholder="#{find.executor.form.maxCapacity}"
                                                    th:field="*{maxCapacity}"/>
-                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +126,6 @@
                                             <input type="text" class="form-control" id="maxLoad" name="maxLoad"
                                                    th:placeholder="#{find.executor.form.maxLoad}"
                                                    th:field="*{maxLoad}"/>
-                                            <!--<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>-->
                                         </div>
                                     </div>
                                 </div>
@@ -141,8 +135,6 @@
                                                 th:text="#{find.executor.form.maxPrice}"/></label>
                                         <input type="text" class="form-control" id="maxPrice" name="maxPrice"
                                                th:placeholder="#{find.executor.form.maxPrice}" th:field="*{maxPrice}"/>
-                                        <!--<select id="guest1" name="guest" class="form-control">-->
-                                        <!--<option value="1">1 Guest</option>-->
                                         </select>
                                     </div>
                                 </div>
