@@ -55,7 +55,7 @@
                                         <select id="carType" name="id" th:field="*{carTypeId}"
                                                 class="input-md form-control" style="margin-bottom:10px">
                                             <option th:value="#{car.type.select.all.value}"
-                                                    th:text="#{car.type.select.all.text}" ></option>
+                                                    th:text="#{car.type.select.all.text}"></option>
                                             <option th:each="carType : ${carTypes}"
                                                     th:value="${carType.id}"
                                                     th:text="${carType.type}">
@@ -91,13 +91,11 @@
                                                 th:text="#{find.executor.form.minPrice}"/></label>
                                         <input type="text" class="form-control" id="minPrice" name="minPrice"
                                                th:placeholder="#{find.executor.form.minPrice}" th:field="*{minPrice}"/>
-                                        </select>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="row">
-
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="sr-only" for="dislocation"><span
@@ -135,20 +133,19 @@
                                                 th:text="#{find.executor.form.maxPrice}"/></label>
                                         <input type="text" class="form-control" id="maxPrice" name="maxPrice"
                                                th:placeholder="#{find.executor.form.maxPrice}" th:field="*{maxPrice}"/>
-                                        </select>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-10"></div>
-                                    <div class="col-md-2">
-                                        <button type="submit" class="btn btn-default btn-primary"
-                                                name="Find"
-                                                th:value="#{find.executor.form.button}">
-                                            <span th:text="#{find.executor.form.button}"/>
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10"></div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-default btn-primary"
+                                            name="Find"
+                                            th:value="#{find.executor.form.button}">
+                                        <span th:text="#{find.executor.form.button}"/>
+                                    </button>
                                 </div>
+                            </div>
                         </form>
                         <!--</div>-->
                     </div>
@@ -167,8 +164,8 @@
                                 <li th:text="${'capacity : '+car.car.capacity}"></li>
                                 <li th:if="${car.offers != null}">
                                     <ul th:each="offer : ${car.offers}">
-                                        <li th:text="${'price : '+offer.price}"></li>
-                                        <li th:text="${'description : '+offer.description}"></li>
+                                        <li th:text="${'price : '+price}"></li>
+                                        <li th:text="${'description : '+description}"></li>
                                     </ul>
                                 </li>
                             </ul>

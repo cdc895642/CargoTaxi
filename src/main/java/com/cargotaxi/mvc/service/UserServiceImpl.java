@@ -4,11 +4,9 @@ import com.cargotaxi.mvc.controller.form.FindCarDTO;
 import com.cargotaxi.mvc.controller.form.NewUserDTO;
 import com.cargotaxi.mvc.dao.OfferRepository;
 import com.cargotaxi.mvc.dao.UserRepository;
-import com.cargotaxi.mvc.model.Car;
 import com.cargotaxi.mvc.model.Offer;
 import com.cargotaxi.mvc.model.Phone;
 import com.cargotaxi.mvc.model.Role;
-import com.cargotaxi.mvc.model.Role_;
 import com.cargotaxi.mvc.model.User;
 import com.cargotaxi.mvc.model.UserCar;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static com.cargotaxi.mvc.model.Role_.users;
 
 @Service
 public class UserServiceImpl extends AbstractServiceImpl<User> implements
