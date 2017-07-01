@@ -164,8 +164,8 @@
                                 <li th:text="${'capacity : '+car.car.capacity}"></li>
                                 <li th:if="${car.offers != null}">
                                     <ul th:each="offer : ${car.offers}">
-                                        <li th:text="${'price : '+price}"></li>
-                                        <li th:text="${'description : '+description}"></li>
+                                        <li th:text="${'price : '+offer.price}"></li>
+                                        <li th:text="${'description : '+offer.description}"></li>
                                     </ul>
                                 </li>
                             </ul>

@@ -87,7 +87,9 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
     }
 
     public List<User> findExecutorsAll() {
-        return userRepository.findAll(isExecutor());
+        List<User> users=userRepository.findAll(isExecutor());
+        offersLazyLoad(users);
+        return users;
         //return userRepository.findExecutorAll();
     }
 
