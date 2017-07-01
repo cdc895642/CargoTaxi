@@ -11,32 +11,15 @@ import java.util.Set;
 @Entity
 @Table(name = "user_cars")
 public class UserCar  implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+
     private int id;
-
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "car_id")
     private Car car;
-
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
-
-    @Column(name = "description")
-    @Size(max = 2000)
     private String description;
-
-    @Column(name = "location")
-    @Size(max = 200)
     private String location;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="userCar")
     private Set<Offer> offers;
 
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy="userCar")
     public Set<Offer> getOffers() {
         return offers;
     }
@@ -45,6 +28,9 @@ public class UserCar  implements Serializable {
         this.offers = offers;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -53,6 +39,9 @@ public class UserCar  implements Serializable {
         this.id = id;
     }
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     public Car getCar() {
         return car;
     }
@@ -61,6 +50,9 @@ public class UserCar  implements Serializable {
         this.car = car;
     }
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -69,6 +61,8 @@ public class UserCar  implements Serializable {
         this.user = user;
     }
 
+    @Column(name = "description")
+    @Size(max = 2000)
     public String getDescription() {
         return description;
     }
@@ -77,6 +71,8 @@ public class UserCar  implements Serializable {
         this.description = description;
     }
 
+    @Column(name = "location")
+    @Size(max = 200)
     public String getLocation() {
         return location;
     }

@@ -102,7 +102,7 @@
                                     <div class="form-group">
                                         <label class="sr-only" for="dislocation"><span
                                                 th:text="#{find.executor.form.dislocation}"/></label>
-                                        <input type="email" class="form-control" id="dislocation"
+                                        <input type="text" class="form-control" id="dislocation"
                                                name="dislocation" th:placeholder="#{find.executor.form.dislocation}"
                                                th:field="*{dislocation}"/>
                                     </div>
@@ -165,6 +165,12 @@
                                 <li th:text="${'type : '+car.car.carType.type}"></li>
                                 <li th:text="${'load : '+car.car.load}"></li>
                                 <li th:text="${'capacity : '+car.car.capacity}"></li>
+                                <li th:if="${car.offers != null}">
+                                    <ul th:each="offer : ${car.offers}">
+                                        <li th:text="${'price : '+offer.price}"></li>
+                                        <li th:text="${'description : '+offer.description}"></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </dd>
                     </dl>
