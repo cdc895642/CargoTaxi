@@ -67,7 +67,7 @@ public class User implements Serializable{
         this.orders = orders;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+    @OneToMany(fetch = FetchType.EAGER, //cascade = CascadeType.ALL,
             mappedBy = "user")
     public Set<UserCar> getCars() {
         return cars;

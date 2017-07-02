@@ -40,18 +40,17 @@
         <div class="col-md-9">
 
             <div class="thumbnail">
-                <h3><span th:text="#{car.new.title}"/></h3>
+                <h3><span th:text="#{my.cars.title}"/></h3>
                 <div class="caption-full">
 
                     <form class="form-horizontal" id="carform"
-                          th:action="@{user/cars}">
+                          th:action="@{cars}">
 
-                        <dl th:each="executor : ${executors}">
-                            <dt th:text="${'login : '+executor.login}"></dt>
-                            <dt th:text="${'email : '+executor.email}"></dt>
+                        <dl th:each="car, carStat : ${cars}">
                             <dt>Avto :</dt>
-                            <dd th:each="car : ${executor.cars}">
+                            <dd>
                                 <ul>
+                                    <li th:text="${'id : '+car.id}"></li>
                                     <li th:text="${'description : '+car.description}"></li>
                                     <li th:text="${'location : '+car.location}"></li>
                                     <li th:text="${'type : '+car.car.carType.type}"></li>
@@ -64,6 +63,18 @@
                                         </ul>
                                     </li>
                                 </ul>
+                                <button type="submit" name="removeCar"
+                                        class="btn btn-primary btn btn-info"
+                                        style="vertical-align:baseline; background-color:#286090"
+                                        th:value="*{cars[__${carStat.index}__].id}"><span
+                                        th:text="#{my.cars.button.remove}"/>
+                                </button>
+                                <button type="submit" name="editCar"
+                                        class="btn btn-primary btn btn-info"
+                                        style="vertical-align:baseline; background-color:#286090"
+                                        th:value="*{cars[__${carStat.index}__].id}"><span
+                                        th:text="#{my.cars.button.edit}"/>
+                                </button>
                             </dd>
                         </dl>
 

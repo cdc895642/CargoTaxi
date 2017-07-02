@@ -33,7 +33,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .failureUrl("/signin-error.html")
                 .and()
-                .authorizeRequests().antMatchers("/**/new")
+                .authorizeRequests().antMatchers("/**/new","/user/**")
                 .authenticated()
                 .antMatchers("/admin/**").   hasRole("ADMIN")
                 .and()

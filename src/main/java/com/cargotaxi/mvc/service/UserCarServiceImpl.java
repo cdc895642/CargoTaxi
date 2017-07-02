@@ -22,7 +22,7 @@ import java.util.List;
 
 @Service
 public class UserCarServiceImpl  extends AbstractServiceImpl<UserCar> implements
-        UserCarService<UserCar>{
+        UserCarService{
 
     @Autowired
     UserCarRepository userCarRepository;
@@ -40,6 +40,12 @@ public class UserCarServiceImpl  extends AbstractServiceImpl<UserCar> implements
     public void init() {
         setRepository(userCarRepository);
     }
+
+//    @Override
+//@Transactional
+//public void deleteById(int id){
+//        userCarRepository.delete(id);
+//}
 
     @Transactional
     @Override
@@ -72,5 +78,12 @@ public class UserCarServiceImpl  extends AbstractServiceImpl<UserCar> implements
             offerRepository.save(offer);
         }
         return userCar;
+    }
+
+    @Override
+    public List<UserCar> findUserCarsOfPrincipal(Principal user) {
+        List<UserCar> cars=userCarRepository.findByUserLogin(user.getName());
+        cars.forEach(car->car.setOffers(offerRepository.findByUserCar(car)));
+        return cars;
     }
 }
