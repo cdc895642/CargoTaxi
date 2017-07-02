@@ -10,6 +10,8 @@ public class OfferDTO {
     private BigDecimal price;
     private String description;
 
+    public OfferDTO(){}
+
     public BigDecimal getPrice() {
         return price;
     }
