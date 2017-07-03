@@ -4,7 +4,10 @@ import com.cargotaxi.config.DatabaseConfig;
 import com.cargotaxi.config.MvcConfig;
 import com.cargotaxi.config.SecurityConfig;
 import com.cargotaxi.config.WebConfig;
+import com.cargotaxi.mvc.model.Car;
+import com.cargotaxi.mvc.model.CarType;
 import com.cargotaxi.mvc.model.User;
+import com.cargotaxi.mvc.model.UserCar;
 import com.cargotaxi.mvc.service.UserService;
 import com.cargotaxi.mvc.service.UserServiceImpl;
 import org.junit.Test;
@@ -42,14 +45,26 @@ public class UserRepositoryTest {
 //    EntitiesCreator entitiesCreator;
 @Autowired
 UserRepository userRepository;
+@Autowired
+UserCarRepository userCarRepository;
 
     @Test
     public void test(){
+        CarType carType=new CarType();
+        carType.setType("легковой");
         User user=new User();
         user.setLogin("11111");
         user.setPassword("11111");
         userRepository.save(user);
-List<User> list = userRepository.findAll();
+        Car car=new Car();
+        car.setCarType(carType);
+        UserCar userCar=new UserCar();
+userCar.setCar(car);
+userCar.setUser(user);
+userCarRepository.save(userCar);
+//        userRepository.save(user);
+//List<User> list = userRepository.findAll();
+        List<UserCar> list=userCarRepository.findAll();
 //        entitiesCreator.create();
         System.out.print(list.size());
     }
