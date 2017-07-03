@@ -18,20 +18,22 @@ import org.springframework.test.context.TestContextBootstrapper;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.test.context.web.AnnotationConfigWebContextLoader;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@WebAppConfiguration
+
+@RunWith(SpringRunner.class)//SpringJUnit4ClassRunner.class
 //@BootstrapWith(value=TestContextBootstrapper.class)
 
-@ContextConfiguration(
+@ContextConfiguration(loader = AnnotationConfigWebContextLoader.class,
         classes = { DatabaseConfig.class, MvcConfig.class, SecurityConfig
-                .class, WebConfig.class},
-        loader = AnnotationConfigContextLoader.class)
+                .class, WebConfig.class})//, loader = AnnotationConfigContextLoader.class
 @Transactional
-@WebAppConfiguration
+
 //@Import(MvcConfig.class)
 //@SpringBootTest
 //@DataJpaTest
@@ -43,6 +45,10 @@ UserRepository userRepository;
 
     @Test
     public void test(){
+        User user=new User();
+        user.setLogin("11111");
+        user.setPassword("11111");
+        userRepository.save(user);
 List<User> list = userRepository.findAll();
 //        entitiesCreator.create();
         System.out.print(list.size());

@@ -78,7 +78,7 @@ public class User implements Serializable{
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//GenerationType.IDENTITY GenerationType.SEQUENCE
     @Column(name = "id")
     public int getId() {
         return id;

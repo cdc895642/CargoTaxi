@@ -35,6 +35,8 @@ public class DatabaseConfig {
     private String jdbcUserName;
     @Value("${pgsql.password}")
     private String jdbcPassword;
+    @Value("${hibernate.dialect}")
+    private String hibernateDialect;
 
     @Bean(name = "dataSource")
     public DriverManagerDataSource getDriverManagerDataSource() {
@@ -56,7 +58,7 @@ public class DatabaseConfig {
         em.setJpaVendorAdapter(vendorAdapter);
 
         Properties jpaProperties = new Properties();
-        jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        jpaProperties.put("hibernate.dialect", hibernateDialect);
         jpaProperties.put("hibernate.show_sql", true);
         jpaProperties.put("hibernate.format_sql", "false");
         jpaProperties.put("hibernate.hbm2ddl.auto", "update");//update validate
