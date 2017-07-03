@@ -126,7 +126,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
                         )));
     }
 
-    private Specification<User> userCarSpecification(FindCarDTO findCarDTO) {
+    protected Specification<User> userCarSpecification(FindCarDTO findCarDTO) {
         return (root, query, builder) -> {
             //Constructing list of parameters
             List<Predicate> predicates = new ArrayList<Predicate>();
