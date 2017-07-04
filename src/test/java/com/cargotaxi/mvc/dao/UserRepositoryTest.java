@@ -4,8 +4,10 @@ import com.cargotaxi.config.DatabaseConfig;
 import com.cargotaxi.config.MvcConfig;
 import com.cargotaxi.config.SecurityConfig;
 import com.cargotaxi.config.WebConfig;
+import com.cargotaxi.mvc.controller.form.FindCarDTO;
 import com.cargotaxi.mvc.model.Car;
 import com.cargotaxi.mvc.model.CarType;
+import com.cargotaxi.mvc.model.Offer;
 import com.cargotaxi.mvc.model.User;
 import com.cargotaxi.mvc.model.UserCar;
 import com.cargotaxi.mvc.service.UserService;
@@ -15,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestContextBootstrapper;
@@ -26,6 +29,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebAppConfiguration
 
@@ -33,39 +37,58 @@ import java.util.List;
 //@BootstrapWith(value=TestContextBootstrapper.class)
 
 @ContextConfiguration(loader = AnnotationConfigWebContextLoader.class,
-        classes = { DatabaseConfig.class, MvcConfig.class, SecurityConfig
-                .class, WebConfig.class})//, loader = AnnotationConfigContextLoader.class
+        classes = {DatabaseConfig.class, MvcConfig.class, SecurityConfig
+                .class, WebConfig.class})
+//, loader = AnnotationConfigContextLoader.class
 @Transactional
 
 //@Import(MvcConfig.class)
 //@SpringBootTest
 //@DataJpaTest
 public class UserRepositoryTest {
-//    @Autowired
+    //    @Autowired
 //    EntitiesCreator entitiesCreator;
-@Autowired
-UserRepository userRepository;
-@Autowired
-UserCarRepository userCarRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    UserCarRepository userCarRepository;
+    @Autowired
+    CarTypeRepository carTypeRepository;
+    @Autowired
+    CarRepository carRepository;
+    @Autowired
+    OfferRepository offerRepository;
 
     @Test
-    public void test(){
-        CarType carType=new CarType();
-        carType.setType("легковой");
-        User user=new User();
-        user.setLogin("11111");
-        user.setPassword("11111");
-        userRepository.save(user);
-        Car car=new Car();
-        car.setCarType(carType);
-        UserCar userCar=new UserCar();
-userCar.setCar(car);
-userCar.setUser(user);
-userCarRepository.save(userCar);
-//        userRepository.save(user);
-//List<User> list = userRepository.findAll();
-        List<UserCar> list=userCarRepository.findAll();
-//        entitiesCreator.create();
-        System.out.print(list.size());
+    public void test() {
+        EntitiesCreator creator = new EntitiesCreator();
+        UserServiceImplTest userService=new UserServiceImplTest();
+        creator.create();
+        List<CarType> carTypes=creator.getCarTypes().stream()
+                .map(carTypeRepository::save)
+                .collect(Collectors.toList());
+        creator.getCars().forEach(carRepository::save);
+        List<User> users=creator.getUsers().stream().map(userRepository::save).collect(Collectors.toList());
+        System.out.println(users.size());
+        creator.getUserCars().forEach(userCarRepository::save);
+        List<Offer> offers=creator.getOffers().stream().map
+                (offerRepository::save).collect(Collectors.toList());
+        FindCarDTO findCarDTO=new FindCarDTO();
+        users=userRepository.findAll();
+        System.out.println(users.size());
+        findCarDTO.setCarTypeId(-1);
+        Specification<User> spec=userService
+                .userCarSpecification(findCarDTO);
+        String s=spec.toString();
+        //spec.toPredicate()
+        List<User> result=userRepository.findAll(spec);
+        System.out.println(result.size());
+
+    }
+
+    private static class UserServiceImplTest extends UserServiceImpl{
+        public Specification<User> userCarSpecification(FindCarDTO findCarDTO){
+            return super.userCarSpecification(findCarDTO);
+        }
     }
 }

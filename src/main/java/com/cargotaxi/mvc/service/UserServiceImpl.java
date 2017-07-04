@@ -118,7 +118,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
         return users;
     }
 
-    private void offersLazyLoad(List<User> users) {
+    protected void offersLazyLoad(List<User> users) {
         users.forEach(
                 user -> user.getCars().forEach(
                         userCar -> userCar.setOffers(
@@ -175,6 +175,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
             query.distinct(true);
             return builder.and(predicates.toArray(new Predicate[predicates
                     .size()]));
+
         };
     }
 

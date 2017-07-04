@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "car_type")
-public class CarType  implements Serializable {
+public class CarType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
@@ -18,6 +18,13 @@ public class CarType  implements Serializable {
     @Size(max = 50)
     @Column(name = "type")
     private String type;
+
+    public CarType() {
+    }
+
+    public CarType(String type) {
+        this.type = type;
+    }
 
     public int getId() {
         return id;
