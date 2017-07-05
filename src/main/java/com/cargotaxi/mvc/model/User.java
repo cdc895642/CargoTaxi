@@ -19,7 +19,7 @@ public class User implements Serializable{
     private String email;
     private Set<Bid> bids;
     private Set<Order> orders;
-    private Set<UserCar> cars;
+    private Set<UserCar> cars=new HashSet<>();
     private Set<Role> roles=new HashSet<>();
     private Set<Phone> phones;
 

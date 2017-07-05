@@ -48,6 +48,7 @@ public class EntitiesCreator {
             for (int y = 0; y < 2; y++) {
                 UserCar userCar = new UserCar();
                 userCar.setUser(users.get(x));
+                users.get(x).getCars().add(userCar);
                 userCar.setCar(cars.get(carIndex++));
                 System.out.println(String.format("car of user %s", users.get
                         (x).getLogin()));

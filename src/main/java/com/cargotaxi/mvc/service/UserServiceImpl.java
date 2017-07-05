@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -118,7 +120,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
         return users;
     }
 
-    protected void offersLazyLoad(List<User> users) {
+    private void offersLazyLoad(List<User> users) {
         users.forEach(
                 user -> user.getCars().forEach(
                         userCar -> userCar.setOffers(
@@ -131,7 +133,6 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
             //Constructing list of parameters
             List<Predicate> predicates = new ArrayList<Predicate>();
             Join<User, UserCar> userCarJoin = root.join("cars");
-            Join<UserCar, Offer> offerJoin = userCarJoin.join("offers");
 
             //Adding predicates in case of parameter not being null
             if (findCarDTO.getMinCapacity() != null) {
@@ -164,12 +165,22 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
                         ("load"), findCarDTO.getMaxLoad()));
             }
             if (findCarDTO.getMinPrice() != null) {
-                predicates.add(builder.ge(offerJoin.get("price"), findCarDTO
-                        .getMinPrice()));
+                Subquery<UserCar> subquery = query.subquery(UserCar.class);
+                Root<Offer> subRoot = subquery.from(Offer.class);
+                subquery.select(subRoot.get("userCar"));
+                Predicate p = builder.ge(subRoot.get("price"),
+                        findCarDTO.getMinPrice());
+                subquery.where(p);
+                query.where(builder.in(builder.exists(subquery)));
             }
             if (findCarDTO.getMaxPrice() != null) {
-                predicates.add(builder.le(offerJoin.get("price"), findCarDTO
-                        .getMaxPrice()));
+                Subquery<UserCar> subquery = query.subquery(UserCar.class);
+                Root<Offer> subRoot = subquery.from(Offer.class);
+                subquery.select(subRoot.get("userCar"));
+                Predicate p = builder.le(subRoot.get("price"),
+                        findCarDTO.getMaxPrice());
+                subquery.where(p);
+                query.where(builder.in(builder.exists(subquery)));
             }
 
             query.distinct(true);

@@ -67,12 +67,22 @@ public class UserRepositoryTest {
         List<CarType> carTypes=creator.getCarTypes().stream()
                 .map(carTypeRepository::save)
                 .collect(Collectors.toList());
-        creator.getCars().forEach(carRepository::save);
+        List<Car> cars=creator.getCars().stream().map(carRepository::save)
+                .collect(Collectors.toList());;
         List<User> users=creator.getUsers().stream().map(userRepository::save).collect(Collectors.toList());
         System.out.println(users.size());
-        creator.getUserCars().forEach(userCarRepository::save);
+        List<UserCar> userCars=creator.getUserCars().stream().map
+                (userCarRepository::save).collect(Collectors.toList());
         List<Offer> offers=creator.getOffers().stream().map
                 (offerRepository::save).collect(Collectors.toList());
+//        for (User user:creator.getUsers()){
+//            Car car=null;
+//            UserCar userCar1=null;
+//            for (UserCar userCar:user.getCars()){
+//                car=carRepository.save(userCar.getCar());
+//                userCarRepository.save(userCar);
+//            }
+//        }
         FindCarDTO findCarDTO=new FindCarDTO();
         users=userRepository.findAll();
         System.out.println(users.size());
@@ -82,6 +92,11 @@ public class UserRepositoryTest {
         String s=spec.toString();
         //spec.toPredicate()
         List<User> result=userRepository.findAll(spec);
+        users.forEach(
+                user -> user.getCars().forEach(
+                        userCar -> userCar.setOffers(
+                                offerRepository.findByUserCar(userCar)
+                        )));
         System.out.println(result.size());
 
     }
