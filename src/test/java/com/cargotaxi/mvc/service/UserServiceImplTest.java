@@ -79,7 +79,6 @@ public class UserServiceImplTest {
 
         //Act
         List<User> users = userService.findExecutorsBySpecification(findCarDTO);
-//        lazyOfferLoad(users,offersAll);
         users.forEach(user->{
             user.getCars().forEach(car->{
                 car.getOffers().forEach(o->{
