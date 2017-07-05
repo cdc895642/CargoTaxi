@@ -34,10 +34,8 @@ public class EntitiesCreator {
             offer.setPrice(BigDecimal.valueOf(x % 6 + 1 + x / 6));
             offer.setDescription(String.format("description %s for price %s", x,
                     (x % 6 + 1 + x / 6)));
-            offer.setUserCar(userCars.get(x%6));
+            offer.setUserCar(userCars.get(x % 12));
             offers.add(offer);
-            System.out.println(String.format("new price - %s", (x % 6 + 1 + x
-                    / 6)));
         }
     }
 
@@ -50,9 +48,8 @@ public class EntitiesCreator {
                 userCar.setUser(users.get(x));
                 users.get(x).getCars().add(userCar);
                 userCar.setCar(cars.get(carIndex++));
-                System.out.println(String.format("car of user %s", users.get
-                        (x).getLogin()));
-                userCar.setDescription(String.format("description for car %s of "
+                userCar.setDescription(String.format("description for car %s "
+                        + "of "
                         + "user %s", y, x));
                 userCar.setLocation(String.format("location for car %s of "
                         + "user %s", y, x));
@@ -70,10 +67,6 @@ public class EntitiesCreator {
                 car.setCapacity(BigDecimal.valueOf(x + y + 1));
                 car.setLoad(x + y + 100);
                 cars.add(car);
-                System.out.println(String.format("car type - %s", carTypes
-                        .get(y).getType()));
-                System.out.println(String.format("capacity - %s", (x + y + 1)));
-                System.out.println(String.format("load - %s", (x + y + 100)));
             }
         }
     }

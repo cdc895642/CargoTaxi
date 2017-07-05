@@ -28,7 +28,7 @@ public class AddUserTest {
 
         HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion
                 .BEST_SUPPORTED);
-        driver.setJavascriptEnabled(true);
+        driver.setJavascriptEnabled(false);
         driver.get(START_URL);
 
         for (int x = START_USER_INDEX; x < END_USER_INDEX; x++) {

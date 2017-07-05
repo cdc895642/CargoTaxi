@@ -18,4 +18,9 @@ public class CarTypeServiceImpl   extends AbstractServiceImpl<CarType> implement
     public void init() {
         setRepository(carTypeRepository);
     }
+
+    public CarType findByType(String type){
+        return carTypeRepository.findByType(type);
+    }
+
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
@@ -133,6 +134,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
             //Constructing list of parameters
             List<Predicate> predicates = new ArrayList<Predicate>();
             Join<User, UserCar> userCarJoin = root.join("cars");
+            Join<UserCar, Offer> carOfferJoin=userCarJoin.join("offers");
 
             //Adding predicates in case of parameter not being null
             if (findCarDTO.getMinCapacity() != null) {
@@ -171,7 +173,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
                 Predicate p = builder.ge(subRoot.get("price"),
                         findCarDTO.getMinPrice());
                 subquery.where(p);
-                query.where(builder.in(builder.exists(subquery)));
+                predicates.add(builder.in(carOfferJoin.get("userCar")).value
+                        (subquery));
             }
             if (findCarDTO.getMaxPrice() != null) {
                 Subquery<UserCar> subquery = query.subquery(UserCar.class);
@@ -180,7 +183,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
                 Predicate p = builder.le(subRoot.get("price"),
                         findCarDTO.getMaxPrice());
                 subquery.where(p);
-                query.where(builder.in(builder.exists(subquery)));
+                predicates.add(builder.in(carOfferJoin.get("userCar")).value
+                        (subquery));
             }
 
             query.distinct(true);
