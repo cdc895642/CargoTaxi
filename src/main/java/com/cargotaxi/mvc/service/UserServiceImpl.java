@@ -30,14 +30,23 @@ import java.util.Set;
 public class UserServiceImpl extends AbstractServiceImpl<User> implements
         UserService<User> {
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
     private RoleServiceImpl roleService;
-    @Autowired
     private OfferRepository offerRepository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository,
+                           PasswordEncoder passwordEncoder,
+                           RoleServiceImpl roleService,
+                           OfferRepository offerRepository) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
+        this.offerRepository = offerRepository;
+    }
+
+    public UserServiceImpl(){}
 
     @PostConstruct
     public void init() {
@@ -90,7 +99,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
     }
 
     public List<User> findExecutorsAll() {
-        List<User> users=userRepository.findAll(isExecutor());
+        List<User> users = userRepository.findAll(isExecutor());
         offersLazyLoad(users);
         return users;
         //return userRepository.findExecutorAll();
@@ -121,7 +130,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
         return users;
     }
 
-    private void offersLazyLoad(List<User> users) {
+    public void offersLazyLoad(List<User> users) {
         users.forEach(
                 user -> user.getCars().forEach(
                         userCar -> userCar.setOffers(
@@ -134,7 +143,7 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
             //Constructing list of parameters
             List<Predicate> predicates = new ArrayList<Predicate>();
             Join<User, UserCar> userCarJoin = root.join("cars");
-            Join<UserCar, Offer> carOfferJoin=userCarJoin.join("offers");
+            Join<UserCar, Offer> carOfferJoin = userCarJoin.join("offers");
 
             //Adding predicates in case of parameter not being null
             if (findCarDTO.getMinCapacity() != null) {
@@ -222,7 +231,8 @@ public class UserServiceImpl extends AbstractServiceImpl<User> implements
         }
     }
 
-    private void cleanMoreThanMaxPrice(List<User> users, FindCarDTO findCarDTO) {
+    private void cleanMoreThanMaxPrice(List<User> users, FindCarDTO
+            findCarDTO) {
         java.util.function.Predicate<Offer> predicate = p -> p.getPrice()
                 .compareTo(findCarDTO.getMaxPrice()) > 0;
         //remove inappropriate offers
