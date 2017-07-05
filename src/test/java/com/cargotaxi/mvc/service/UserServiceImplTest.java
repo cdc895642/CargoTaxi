@@ -8,19 +8,32 @@ import com.cargotaxi.mvc.model.CarType;
 import com.cargotaxi.mvc.model.Offer;
 import com.cargotaxi.mvc.model.User;
 import com.cargotaxi.mvc.model.UserCar;
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
 public class UserServiceImplTest {
+
+    @Mock private UserRepository userRepository;
+    @Mock private OfferRepository offerRepository;
+    @InjectMocks private UserServiceImpl userService;
+
+    @Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void findExecutorsBySpecification_setPredicate_cleanOffers() {
@@ -58,16 +71,6 @@ public class UserServiceImplTest {
                 }
             }
         }
-        UserRepository userRepository = mock(UserRepository.class);
-        when(userRepository.findAll(any(Specification.class)))
-                .thenReturn(usersAll);
-        PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
-        RoleServiceImpl roleService = mock(RoleServiceImpl.class);
-        OfferRepository offerRepository = mock(OfferRepository.class);
-
-        UserServiceImpl userService = spy(new UserServiceImpl(userRepository,
-                passwordEncoder, roleService, offerRepository));
-        doNothing().when(userService).offersLazyLoad(anyList());
         FindCarDTO findCarDTO = new FindCarDTO();
         CarType carType = creator.getCarTypes().stream().filter(c->c.getType
                 ().equalsIgnoreCase(PASSENGER_CARTYPE)).findFirst().get();
@@ -76,6 +79,11 @@ public class UserServiceImplTest {
         findCarDTO.setMaxLoad(MAX_LOAD);
         findCarDTO.setMinPrice(MIN_PRICE);
         findCarDTO.setMaxPrice(MAX_PRICE);
+
+        when(userRepository.findAll(any(Specification.class))).thenReturn(usersAll);
+        when(offerRepository.findByUserCar(any(UserCar.class))).thenAnswer(
+                invocation -> ((UserCar) invocation.getArguments()[0]).getOffers()
+        );
 
         //Act
         List<User> users = userService.findExecutorsBySpecification(findCarDTO);
