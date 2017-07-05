@@ -25,8 +25,8 @@ public class AddCarTest {
 
     private final String LOGIN_SUBMIT_XPATH = "//input[@type='submit']";
 
-    private final int START_USER_INDEX = 11;
-    private final int END_USER_INDEX = 15;
+    private final int START_USER_INDEX = 16;
+    private final int END_USER_INDEX = 17;
     private final int CAR_TYPE_COUNT=7;
     private final String[] CITIES=new String[]{"dnipro", "kyiv", "poltava"};
     private final String SUBMIT_BUTTON_ID="submit_new_car_id";

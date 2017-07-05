@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
 public class UserServiceImplTest {
 
     @Test
-    public void findExecutorsBySpecification_setPredicate_returnResult() {
+    public void findExecutorsBySpecification_setPredicate_cleanOffers() {
         //Arrange
         final String PASSENGER_CARTYPE = "грузовая";
         int expectedOfferCount = 0;
@@ -37,6 +37,9 @@ public class UserServiceImplTest {
         List<User> usersAll = creator.getUsers();
         List<Offer> offersAll = creator.getOffers();
         lazyOfferLoad(usersAll,offersAll);
+        List<CarType> carTypes=creator.getCarTypes();
+        carTypes.get(0).setId(1);
+        carTypes.get(0).setId(2);
         for (User user : usersAll) {
             for (UserCar userCar : user.getCars()) {
                 if (!userCar.getCar().getCarType().getType().equalsIgnoreCase
