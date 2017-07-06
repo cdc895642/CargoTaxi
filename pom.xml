@@ -120,39 +120,6 @@
         </dependency>
 
         <!--JUnit Test-->
-        <!--<dependency>-->
-            <!--<groupId>junit</groupId>-->
-            <!--<artifactId>junit</artifactId>-->
-            <!--<version>4.12</version>-->
-            <!--<scope>test</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.hamcrest</groupId>-->
-                    <!--<artifactId>hamcrest-core</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.hamcrest</groupId>-->
-            <!--<artifactId>hamcrest-library</artifactId>-->
-            <!--<version>1.3</version>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-context</artifactId>-->
-            <!--<version>4.3.9.RELEASE</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.logging.log4j</groupId>-->
-            <!--<artifactId>log4j-core</artifactId>-->
-            <!--<version>2.8.2</version>-->
-        <!--</dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -204,24 +171,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Test Artifacts with Spring-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-test</artifactId>-->
-            <!--<version>${spring-framework.version}</version>-->
-            <!--<scope>test</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework</groupId>-->
-                    <!--<artifactId>spring-core</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-
-
-
-
-
         <!--Hibernate ORM-->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -241,6 +190,15 @@
     <build>
         <finalName>cargo-taxi</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <outputDirectory>C:\Tomcat\apache-tomcat-8.0.35\webapps\</outputDirectory>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

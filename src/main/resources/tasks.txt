@@ -1,3 +1,10 @@
+1) mvn package
+2) tomcat/conf/server.xml
+in nide HOST add :
+<Context docBase="cargo-taxi" path="/" reloadable="true" />
+<Context docBase="ROOT" path="/ROOT" reloadable="true" />
+
+
 +1) добавить error.html и обработку ошибок
 +2) добавить login.html и связанный код
 +3) изменить создание авто
